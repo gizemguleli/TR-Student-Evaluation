@@ -43,4 +43,4 @@ Some of the commonly used clustering techniques are K-means clustering, hierarch
 * Q26: The Instructor's evaluation system (midterm and final questions, projects, assignments, etc.) effectively measured the course objectives. 
 * Q27: The Instructor provided solutions to exams and discussed them with students. 
 * Q28: The Instructor treated all students in a right and objective manner. 
-**Q1-Q28 are all Likert-type, meaning that the values are taken from {1,2,3,4,5}**
+* **Q1-Q28 are all Likert-type, meaning that the values are taken from {1,2,3,4,5}**
