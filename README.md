@@ -11,15 +11,15 @@ For example, after computing the principal components, we would able to plot the
 Some of the commonly used clustering techniques are K-means clustering, hierarchical clustering, and DBSCAN. Each of these techniques has its strengths and weaknesses, and the choice of the technique will depend on the characteristics of the dataset and the research question.
 
 ### Attribute Information: 
-**instr:** Instructor's identifier; values taken from {1,2,3} 
-**class:** Course code (descriptor); values taken from {1-13} 
+* **instr:** Instructor's identifier; values taken from {1,2,3} 
+* **class:** Course code (descriptor); values taken from {1-13} 
 **repeat:** Number of times the student is taking this course; values taken from {0,1,2,3} 
 **attendance:** Code of the level of attendance; values from {0, 1, 2, 3, 4} 
 **difficulty:** Level of difficulty of the course as perceived by the student; values taken from {1,2,3,4,5}
-*Q1: The semester course content, teaching method and evaluation system were provided at the start. 
-*Q2: The course aims and objectives were clearly stated at the beginning of the period.
-*Q3: The course was worth the amount of credit assigned to it. 
-*Q4: The course was taught according to the syllabus announced on the first day of class. 
+* Q1: The semester course content, teaching method and evaluation system were provided at the start. 
+* Q2: The course aims and objectives were clearly stated at the beginning of the period.
+* Q3: The course was worth the amount of credit assigned to it. 
+* Q4: The course was taught according to the syllabus announced on the first day of class. 
 Q5: The class discussions, homework assignments, applications and studies were satisfactory. 
 Q6: The textbook and other courses resources were sufficient and up to date. 
 Q7: The course allowed field work, applications, laboratory, discussion and other studies. 
