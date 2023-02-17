@@ -8,11 +8,12 @@ Here we also used to PCA analysis to identify the key features that differentiat
 For example, after computing the principal components, we would able to plot the clustering results based on the first two principal components and visually inspect how well the clusters are separated in this 2D space. We also analyze the loadings of each survey question on the principal components to see which questions are most important in differentiating the clusters.
 Some of the commonly used clustering techniques are K-means clustering, hierarchical clustering, and DBSCAN. Each of these techniques has its strengths and weaknesses, and the choice of the technique will depend on the characteristics of the dataset and the research question.
 ### Attribute Information: 
-instr: Instructor's identifier; values taken from {1,2,3} 
-class: Course code (descriptor); values taken from {1-13} 
-repeat: Number of times the student is taking this course; values taken from {0,1,2,3} 
-attendance: Code of the level of attendance; values from {0, 1, 2, 3, 4} 
-difficulty: Level of difficulty of the course as perceived by the student; values taken from {1,2,3,4,5}
+
+**instr:** Instructor's identifier; values taken from {1,2,3} 
+**class:** Course code (descriptor); values taken from {1-13} 
+**repeat:** Number of times the student is taking this course; values taken from {0,1,2,3} 
+**attendance:** Code of the level of attendance; values from {0, 1, 2, 3, 4} 
+**difficulty:** Level of difficulty of the course as perceived by the student; values taken from {1,2,3,4,5}
 Q1: The semester course content, teaching method and evaluation system were provided at the start. 
 Q2: The course aims and objectives were clearly stated at the beginning of the period.
 Q3: The course was worth the amount of credit assigned to it. 
@@ -40,4 +41,4 @@ Q24: The Instructor gave relevant homework assignments/projects, and helped/guid
 Q26: The Instructor's evaluation system (midterm and final questions, projects, assignments, etc.) effectively measured the course objectives. 
 Q27: The Instructor provided solutions to exams and discussed them with students. 
 Q28: The Instructor treated all students in a right and objective manner. 
-Q1-Q28 are all Likert-type, meaning that the values are taken from {1,2,3,4,5}
+**Q1-Q28 are all Likert-type, meaning that the values are taken from {1,2,3,4,5}
