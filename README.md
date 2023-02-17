@@ -1,4 +1,4 @@
-# TR-Student-Evaluation
+# TR Student Evaluation
 
 ## Table of contents
 * [Problem](#Problem)
