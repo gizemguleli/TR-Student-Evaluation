@@ -1,5 +1,9 @@
 # TR-Student-Evaluation
 
+## Table of contents
+* [Problem](#Problem)
+* [About Dataset](#About-Dataset)
+
 ## Problem
 The problem statement is a typical unsupervised learning problem, where with a given dataset we need to find patterns or groupings in the data without any labeled output variable.
 
