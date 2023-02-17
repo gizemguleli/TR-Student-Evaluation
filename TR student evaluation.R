@@ -68,23 +68,12 @@ cluster_means <- aggregate(eval_data, by=list(trstudent$cluster), mean)
 # View the cluster means for each variable
 print(cluster_means)
 
-
-
 # Compute the principal components
 pca <- prcomp(eval_data, scale=TRUE)
 
 # Extract the first two principal components
 PC1 <- pca$x[,1]
 PC2 <- pca$x[,2]
-
-###In this code, we first subset the dataset to only include the evaluation questions and scale the data to
-#normalize the variables. We then use the prcomp() function to compute the principal components, 
-#with the scale=TRUE parameter indicating that the variables should be scaled. 
-#Finally, we extract the first two principal components (PC1 and PC2) from the result of the prcomp() function.
-#Note that the principal components are linear combinations of the original variables and represent the directions
-#of maximal variation in the data. The first principal component (PC1) captures the most variance in the data, 
-#while the second principal component (PC2) captures the second most variance. 
-#You can compute additional principal components by including more columns in the x[, ] indexing expression.
 
 
 # Load the ggplot2 package
