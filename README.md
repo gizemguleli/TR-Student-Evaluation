@@ -1,7 +1,7 @@
-## TR-Student-Evaluation
-#Problem
+# TR-Student-Evaluation
+##Problem
 The problem statement is a typical unsupervised learning problem, where with a given dataset we need to find patterns or groupings in the data without any labeled output variable.
-#About Dataset
+##About Dataset
 In this case, the dataset consists of feedback from students who attended multiple courses. Each feedback consists of evaluation questions and various other attributes, such as attendance, difficulty, and overall score. The series of questions answered by the students. There are 28 questions, each answered from 1 (very bad) to 5 (very good).
 To analyze this dataset, we used clustering techniques to group similar feedback together based on their attributes. Clustering techniques help us to identify patterns or groupings in the data that are not apparent by simply looking at the raw data.
 Here we also used to PCA analysis to identify the key features that differentiate the groups of students. By computing the principal components of the survey data, we can identify the survey questions that have the highest impact on the clustering results.
