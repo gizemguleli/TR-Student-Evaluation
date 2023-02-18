@@ -46,8 +46,8 @@ In this case, the dataset consists of feedback from students who attended multip
 * Q28: The Instructor treated all students in a right and objective manner. 
 * **Q1-Q28 are all Likert-type, meaning that the values are taken from {1,2,3,4,5}**
 
-## Analyze
-To analyze this dataset, we used clustering techniques to group similar feedback together based on their attributes. Clustering techniques help us to identify patterns or groupings in the data that are not apparent by simply looking at the raw data.
+## Analyse
+To analyse this dataset, we used clustering techniques to group similar feedback together based on their attributes. Clustering techniques help us to identify patterns or groupings in the data that are not apparent by simply looking at the raw data.
 Here we also used to PCA analysis to identify the key features that differentiate the groups of students. By computing the principal components of the survey data, we can identify the survey questions that have the highest impact on the clustering results.
 For example, after computing the principal components, we would able to plot the clustering results based on the first two principal components and visually inspect how well the clusters are separated in this 2D space. We also analyze the loadings of each survey question on the principal components to see which questions are most important in differentiating the clusters.
 Some of the commonly used clustering techniques are K-means clustering, hierarchical clustering, and DBSCAN. Each of these techniques has its strengths and weaknesses, and the choice of the technique will depend on the characteristics of the dataset and the research question.
