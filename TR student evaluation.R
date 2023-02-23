@@ -1,14 +1,22 @@
+TR STUDENT EVALUATION
+Gizem Guleli
+2022-11-28
 
-####preliminary #############
-##loading  and reading packages  if its required 
+```{r,include=FALSE,warning=FALSE, results=FALSE, message=FALSE}
+##Loading and reading packages if its required
+if(!require(ClusterR)){install.packages("rstatix")}
 if(!require(cluster)){install.packages("cluster")}
 if(!require(factoextra)){install.packages("factoextra")}
 if(!require(flexclust)){install.packages("flexclust")}
 if(!require(fpc)){install.packages("fpc")}
 if(!require(ClusterR)){install.packages("ClusterR")}
 if(!require(ClusterR)){install.packages("ggpubr")}
+if(!require(ClusterR)){install.packages("reshape")}
 install.packages("ggpubr", repos = "http://cran.us.r-project.org")
+```
 
+
+```{r, echo=T,warning=FALSE,results=FALSE, message=FALSE}
 library(cluster)
 library(factoextra)
 library(flexclust)
@@ -16,85 +24,157 @@ library(fpc)
 library(ClusterR)
 library(rstatix)
 library(ggpubr)
-
-##Data Loading 
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(reshape)
+library(gridExtra)
 library(readr)
-trstudent <- read_csv("NEW/turkiye-student-evaluation_R_Specific.csv")
+library(ggplot2)
 
-#view and Check first and last 6 obs of dataset to be sure that it readed Clearly 
+```
+
+##Data Loading
+
+trstudent <- read_csv("turkiye-student-evaluation_R_Specific.csv")
+
 head(trstudent)
 tail(trstudent)
-##summarize and stracture of dataset 
-str(trstudent)
-summary(trstudent)
 
-#instance and attribute components in dataset
-dim(trstudent)
+colnames(trstudent)[colnames(trstudent)=="instr"] <- "instructor"
+colnames(trstudent)[colnames(trstudent)=="class"] <- "course"
+colnames(trstudent)[colnames(trstudent)=="nb.repeat"] <- "repeat"
 
 ##Empty value controls
 
+trstudent[!complete.cases(trstudent),]
+colSums(is.na(trstudent))
+attach(trstudent)
+
+###Check changes and last version
+head(trstudent)
+
+# Create histograms of the Instructor, Class, Repeat, Attendance and Difficulty  variables
+
+ins_hist <- ggplot(trstudent, aes(x = `instructor`)) +
+  geom_histogram(color = "black", fill = "red", bins = 10) +
+  stat_bin(aes(label = paste0(round((..count../nrow(trstudent))*100), "%")), geom = "text", vjust = -0.5, color = "black", size = 3, bins = 3) +
+  labs(x = "Instructor", y = "Frequency", title = "Distribution of Instructors")
+
+course_hist <- ggplot(trstudent, aes(x = `course`)) +
+  geom_histogram(color = "black", fill = "blue", bins = 13) +
+  stat_bin(aes(label = paste0(round((..count../nrow(trstudent))*100), "%")), geom = "text", vjust = -0.5, color = "black", size = 3, bins = 13) +
+  labs(x = "Course", y = "Frequency", title = "Distribution of Courses")
+ 
+rep_hist <- ggplot(trstudent, aes(x = `repeat`)) +
+  geom_histogram(color = "black", fill = "yellow", bins = 10) +
+  stat_bin(aes(label = paste0(round((..count../nrow(trstudent))*100), "%")), geom = "text", vjust = -0.5, color = "black", size = 3, bins = 3) +
+  labs(x = "Repeat", y = "Frequency", title = "Distribution of Repeating")
+
+att_hist <- ggplot(trstudent, aes(x = attendance)) +
+  geom_histogram(color = "black", fill = "green", bins = 10) +
+  stat_bin(aes(label = paste0(round((..count../nrow(trstudent))*100), "%")), geom = "text", vjust = -0.5, color = "black", size = 3, bins = 5) +
+  labs(x = "Attendance", y = "Frequency", title = "Distribution of Attendance")
+
+dif_hist <- ggplot(trstudent, aes(x = difficulty)) +
+  geom_histogram(color = "black", fill = "orange", bins = 20) +
+  stat_bin(aes(label = paste0(round((..count../nrow(trstudent))*100), "%")), geom = "text", vjust = -0.5, color = "black", size = 3, bins = 5) +
+  labs(x = "Difficulty", y = "Frequency", title = "Distribution of Difficulty")
+
+grid.arrange(ins_hist, course_hist, rep_hist, att_hist,dif_hist)
+
+
+# Plot a histogram of the scores for each question
+trstudent %>%
+  select(starts_with("Q")) %>%
+  gather() %>%
+  ggplot(aes(value)) +
+  geom_histogram(bins = 5) +
+  facet_wrap(~key, nrow = 5)
+ 
+# Plot a boxplot of the scores for each question by course
+trstudent %>%
+  select(starts_with("Q"), course) %>%
+  gather(key = "question", value = "score", starts_with("Q")) %>%
+  ggplot(aes(course, score)) +
+  geom_boxplot() +
+  facet_wrap(~question, nrow = 5)
+## Warning: Continuous x aesthetic
+## i did you forget `aes(group = ...)`?
+ 
 
 ## Subset the dataset to include only the evaluation questions
-eval_data <- trstudent[, 7:34]
+subset_data <- trstudent[, 7:34]
 
 # Scale the data to normalize the variables
-scaled_data <- scale(eval_data)
+scaled_subset <- scale(subset_data)
 
-# Determine the optimal number of clusters using the elbow method
-wcsse <- c()
-for(i in 1:10) wcsse[i] <- sum(kmeans(scaled_data, centers=i)$withinss)
-plot(1:10, wcsse, type="b", xlab="Number of Clusters", ylab="Within groups sum of squares")
+# Perform PCA analysis
+pca1<-prcomp(scaled_subset, center=FALSE, scale.=FALSE) # stats::
+pca1$rotation
 
-# From the elbow plot, we can see that the optimal number of clusters is 4
-# Apply K-means clustering with 4 clusters
-set.seed(123)
-kmeans_clusters <- kmeans(scaled_data, centers=4)
+plot(pca1)
+ 
+#visulation of PCA results
+fviz_pca_var(pca1, col.var="steelblue")
+ 
+# visusalisation of quality
+fviz_eig(pca1, choice='eigenvalue')
+ 
+fviz_eig(pca1)
+ 
+# table of eigenvalues
+eig.val<-get_eigenvalue(pca1)
+eig.val
 
-#plot(scaled_data, col = kmeans_clusters$cluster, pch=".", cex=3) # figure has only 2D
-#points(kmeans_clusters$centers, col = 1:5, pch = 8, cex=2, lwd=2)
-#fviz_cluster(list(data=scaled_data, cluster=kmeans_clusters$cluster), ellipse.type="norm", geom="point", stand=FALSE, palette="jco", ggtheme=theme_classic()) 
-#factoextra::
+x<-summary(pca1)
+plot(x$importance[3,],type="l") 
+ 
+# displaying the most significant questions that constitute PC1 
+loading_scores_PC_1<-pca1$rotation[,1]
+fac_scores_PC_1<-abs(loading_scores_PC_1)
+fac_scores_PC_1_ranked<-names(sort(fac_scores_PC_1, decreasing=T))
+pca1$rotation[fac_scores_PC_1_ranked, 1]
 
-# View the cluster assignments for each feedback
-cluster_ass <- kmeans_clusters$cluster
+# individual results with factoextra::
+ind<-get_pca_ind(pca1)  
+print(ind)
 
-centers <- kmeans_clusters$centers
-# Add the cluster assignments to the original dataset
-trstudent$cluster <- cluster_ass
-trstudent$cluster <- cluster_ass
-# Analyze the clusters by comparing the means of each variable for each cluster
-cluster_means <- aggregate(eval_data, by=list(trstudent$cluster), mean)
+head(ind$coord) 
+head(ind$contrib)
+var<-get_pca_var(pca1)
+a<-fviz_contrib(pca1, "var", axes=1, xtickslab.rt=90) # default angle=45°
+b<-fviz_contrib(pca1, "var", axes=2, xtickslab.rt=90)
+grid.arrange(a,b,top='Contribution to the first two Principal Components')
+ 
 
-# View the cluster means for each variable
-print(cluster_means)
+#Determinin optimal number of cluster
+
+##using the elbow method using wcsse
+fviz_nbclust(scaled_subset, FUNcluster=kmeans, method = "wss", k.max = 10) + theme_minimal() + ggtitle("The Elbow Method")
+ 
+###using silhouette and kmeans
+fviz_nbclust(scaled_subset, kmeans, method="silhouette")+ theme_minimal()+ ggtitle("The Silhouette") # factoextra::
+ 
+# 3=8 clusters for observations
+km<-eclust(scaled_subset, k=3) 
+ 
+km2<-eclust(scaled_subset, k=8) 
+ 
+# k-means clustering  with PCA result
+set.seed(123) # for reproducibility
+ss.cs<-center_scale(scaled_subset) 
+ss.pca<-princomp(ss.cs)$scores[, 1:2] 
+pcakm3<-KMeans_rcpp(ss.pca, clusters=3, num_init=3, max_iters = 100) 
+pcakm3
+c3<-plot_2d(ss.pca, pcakm3$clusters, pcakm3$centroids)
+c3
+
+pcakm8<-KMeans_rcpp(ss.pca, clusters=8, num_init=3, max_iters = 100) 
+pcakm8
+c8<-plot_2d(ss.pca, pcakm8$clusters, pcakm8$centroids)
+c8
 
 
-
-# Compute the principal components
-pca <- prcomp(eval_data, scale=TRUE)
-
-# Extract the first two principal components
-PC1 <- pca$x[,1]
-PC2 <- pca$x[,2]
-
-###In this code, we first subset the dataset to only include the evaluation questions and scale the data to
-#normalize the variables. We then use the prcomp() function to compute the principal components, 
-#with the scale=TRUE parameter indicating that the variables should be scaled. 
-#Finally, we extract the first two principal components (PC1 and PC2) from the result of the prcomp() function.
-#Note that the principal components are linear combinations of the original variables and represent the directions
-#of maximal variation in the data. The first principal component (PC1) captures the most variance in the data, 
-#while the second principal component (PC2) captures the second most variance. 
-#You can compute additional principal components by including more columns in the x[, ] indexing expression.
-
-
-# Load the ggplot2 package
-library(ggplot2)
-
-# Create a scatterplot of the first two principal components, colored by cluster
-ggplot(trstudent, aes(x=PC1, y=PC2, color=as.factor(cluster))) +
-  geom_point(size=3) +
-  xlab("PC1") +
-  ylab("PC2") +
-  ggtitle("Clustering Results") +
-  theme_bw()
-help(ggplot)
+ 
+ 
