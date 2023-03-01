@@ -5,15 +5,19 @@
 * [Dataset](#About-Dataset)
 * [Analyze](#Analyze)
 * [EDA](#EDA)
-* [Dimension Reduction](#Dimension Reduction)
+* [Dimension Reduction](#Dimension-Reduction)
 * [Clustering](#Clustering)
+* [Conclusion](#Conclusion)
 
 
 ## Problem
+
 The problem statement is a typical unsupervised learning problem, where with a given dataset we need to find patterns or groupings in the data without any labeled output variable.
 
 ## About Dataset
-In this case, the dataset consists of feedback from students who attended multiple courses. Each feedback consists of evaluation questions and various other attributes, such as attendance, difficulty, and overall score. The series of questions answered by the students. There are 28 questions, each answered from 1 (very bad) to 5 (very good).
+
+In this case, the dataset consists of feedback from students who attended multiple courses at Gazi University, Ankara. Each feedback consists of evaluation questions and various other attributes, such as attendance, difficulty. The series of questions which includes course structure,level and quality of delivery, clarity of course objectives, course difficulty, course impact on student's overall college experience and goals, course relevance, and aspects such as
+willingness and ability, and preferences are answered by the students. There are 28 questions, each answered from 1 (very bad) to 5 (very good).
 
 
 ### Attribute Information: 
@@ -51,50 +55,6 @@ In this case, the dataset consists of feedback from students who attended multip
 * Q28: The Instructor treated all students in a right and objective manner. 
 * **Q1-Q28 are all Likert-type, meaning that the values are taken from {1,2,3,4,5}**
 
-TR STUDENT EVALUATION
-Gizem Guleli
-2022-11-28
-Turkey Student Evaluation
-Problem
-The problem statement is a typical unsupervised learning problem, where with a given dataset we need to find patterns or groupings in the data without any labeled output variable.
-About Dataset
-In this case, the dataset consists of feedback from students who attended multiple courses at Gazi University, Ankara. Each feedback consists of evaluation questions and various other attributes, such as attendance, difficulty. The series of questions which includes course structure, level and quality of delivery, clarity of course objectives, course difficulty, course impact on student’s overall college experience and goals, course relevance, and aspects such as willingness and ability, and preferences are answered by the students. There are 28 questions, each answered from 1 (very bad) to 5 (very good).
-Attribute Information:
-instr: Instructor’s identifier; values taken from {1,2,3}
-class: Course code (descriptor); values taken from {1-13}
-repeat: Number of times the student is taking this course; values taken from {0,1,2,3}
-attendance: Code of the level of attendance; values from {0, 1, 2, 3, 4}
-difficulty: Level of difficulty of the course as perceived by the student; values taken from {1,2,3,4,5}
-Q1: The semester course content, teaching method and evaluation system were provided at the start.
-Q2: The course aims and objectives were clearly stated at the beginning of the period.
-Q3: The course was worth the amount of credit assigned to it.
-Q4: The course was taught according to the syllabus announced on the first day of class.
-Q5: The class discussions, homework assignments, applications and studies were satisfactory.
-Q6: The textbook and other courses resources were sufficient and up to date.
-Q7: The course allowed field work, applications, laboratory, discussion and other studies.
-Q8: The quizzes, assignments, projects and exams contributed to helping the learning.
-Q9: I greatly enjoyed the class and was eager to actively participate during the lectures.
-Q10: My initial expectations about the course were met at the end of the period or year.
-Q11: The course was relevant and beneficial to my professional development.
-Q12: The course helped me look at life and the world with a new perspective.
-Q13: The Instructor’s knowledge was relevant and up to date.
-Q14: The Instructor came prepared for classes.
-Q15: The Instructor taught in accordance with the announced lesson plan.
-Q16: The Instructor was committed to the course and was understandable.
-Q17: The Instructor arrived on time for classes.
-Q18: The Instructor has a smooth and easy to follow delivery/speech.
-Q19: The Instructor made effective use of class hours.
-Q20: The Instructor explained the course and was eager to be helpful to students.
-Q21: The Instructor demonstrated a positive approach to students.
-Q22: The Instructor was open and respectful of the views of students about the course.
-Q23: The Instructor encouraged participation in the course.
-Q24: The Instructor gave relevant homework assignments/projects, and helped/guided students.
-Q25: The Instructor responded to questions about the course inside and outside of the course.
-Q26: The Instructor’s evaluation system (midterm and final questions, projects, assignments, etc.) effectively measured the course objectives.
-Q27: The Instructor provided solutions to exams and discussed them with students.
-Q28: The Instructor treated all students in a right and objective manner.
-
-Q1-Q28 are all Likert-type, meaning that the values are taken from {1,2,3,4,5}
 
 ## Analyze
 
@@ -111,12 +71,11 @@ The Distribution of Courses shows that course 3 and course 13 is the most taken 
 
 The Distribution of Repeating histogram shows that the majority of students (%84) is repeated the course only once while minority (%16) repeat the classes for the second or third time. However, this may somewhat complicate our plan to create an interpretable, acceptable classifier because the distribution is too skewed right.
 
-The Distribution of Attendance histogram shows that the majority of students’ the attendance level of the course is weak, with a peak at 0 level and 65% of student attendant lesson less then 3 level. This suggests that most students didn’t attended class regularly.
+The Distribution of Attendance histogram shows that the majority of students' the attendance level of the course is weak, with a peak at 0 level and 65% of student attendant lesson less then 3 level. This suggests that most students didn't attended class regularly.
 
 The difficulty_hist histogram shows that the difficulty level of the course was more evenly distributed, with peaks at 3 on the scale. This suggests that some students found the course relatively easy, while others found it more challenging.
 
-When we check the distribution of evaluation question, most of them seems similar and kind of hard to read histogram graphs and need to look detailiy. From boxplot its more clear to see that some questions ( #14,15,17,19,20,21,21,25,28) are higly rated even there is a some outliers which means few students gave less rate while other questions seems more normally distributed.
-
+When we check the distribution of evaluation question, most of them seems similar and kind of hard to read histogram graphs and need to look detailiy. From boxplot its more clear to see that some questions (#14,15,17,19,20,21,21,25,28) are higly rated even there is a some outliers which means few students gave less rate while other questions seems more normally distributed.
 
 ### Dimension Reduction
 
@@ -137,13 +96,13 @@ Determining the optimal number of clusters is a crucial step in clustering analy
 
 
 ### Conclusion
-The dataset contains evaluation questions for courses and instructors by Turkish university students.The dataset was relatively clean, with no missing data or obvious errors.Principal Component Analysis (PCA) was performed to reduce the dimensionality of the evaluation questions, and two principal components were chosen for further analysis. K-means clustering was performed on the PCA results to group evaluations into clusters based on similarities in responses to the evaluation questions. The optimal number of clusters was found to be 3, based on the elbow method and 8 base on the silhouette method.The PCA and clustering results suggest that there are some underlying patterns in the responses to the evaluation questions, but more detailed analysis would be needed to fully understand the nature of these patterns and their implications.
+The dataset contains evaluation questions for courses and instructors by Turkish university students.The dataset was relatively clean, with no missing data or obvious errors.Principal Component Analysis (PCA) was performed to reduce the dimensionality of the evaluation questions, and two principal components were chosen for further analysis. K-means, PAM and CLARA clustering were performed on the PCA results to group evaluations into clusters based on similarities in responses to the evaluation questions. The optimal number of clusters was found as 8.The silhouette coefficients for k-means, PAM, and CLARA clustering are all relatively high and close to each other, indicating that all three clustering algorithms have produced relatively good clustering solutions. However, the fact that the silhouette coefficient for PAM clustering is slightly higher than the other two algorithms may suggest that PAM is a slightly better fit for the data. The PCA and clustering results suggest that there are some underlying patterns in the responses to the evaluation questions, but more detailed analysis would be needed to fully understand the nature of these patterns and their implications.
+
 
 ### References
 
 Gunduz, N., & Fokoue, E. (2015). Pattern Discovery in Students’ Evaluations of Professors: A Statistical Data Mining Approach. arXiv preprint arXiv:1501.02263.
 Dataset: https://archive.ics.uci.edu/ml/datasets/turkiye+student+evaluation
-https://www.r-project.org/
 https://www.r-project.org/
 https://scikit-learn.org/stable/modules/clustering.html
 
