@@ -4,7 +4,7 @@
 * [Problem](#Problem)
 * [Dataset](#About-Dataset)
 * [Analyze](#Analyze)
-* [EDA](#Exploratory Data Analysis)
+* [Exploratory Data Analysis](#Exploratory Data Analysis)
 
 
 ## Problem
