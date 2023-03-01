@@ -2,9 +2,9 @@
 
 ## Table of contents
 * [Problem](#Problem)
-* [About Dataset](#About-Dataset)
+* [Dataset](#About-Dataset)
 * [Analyze](#Analyze)
-* [EDA](#EDA)
+* [EDA](#Exploratory Data Analysis)
 
 
 ## Problem
