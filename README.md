@@ -4,7 +4,9 @@
 * [Problem](#Problem)
 * [Dataset](#About-Dataset)
 * [Analyze](#Analyze)
-* [Exploratory Data Analysis](#Exploratory Data Analysis)
+* [EDA](#EDA)
+* [Dimension Reduction](#Dimension Reduction)
+* [Clustering](#Clustering)
 
 
 ## Problem
@@ -101,7 +103,7 @@ Q1-Q28 are all Likert-type, meaning that the values are taken from {1,2,3,4,5}
 First, we downloaded and read the required libraries to analyse and visualise the data-set. Then we read the data-set and checked missing values.It appears that the data set contains no missing values and all attributes are numeric. This is a good indication that the data is relatively clean and does not require any preprocessing.
 Therefore, it is always a good idea to examine the data carefully and perform exploratory data analysis (EDA) to gain a better understanding of the data, identify potential problems and make informed decisions about pre-processing, modelling and analysing the data.
 
-### Exploratory Data Analysis
+### EDA
 
 The Distribution of Instructors graph shows that most of the courses are given by Instructor 3 and distribution is too skewed left .
 
