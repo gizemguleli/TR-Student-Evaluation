@@ -101,9 +101,9 @@ The dataset contains evaluation questions for courses and instructors by Turkish
 
 ### References
 
-Gunduz, N., & Fokoue, E. (2015). Pattern Discovery in Students’ Evaluations of Professors: A Statistical Data Mining Approach. arXiv preprint arXiv:1501.02263.
-Dataset: https://archive.ics.uci.edu/ml/datasets/turkiye+student+evaluation
-https://www.r-project.org/
-https://scikit-learn.org/stable/modules/clustering.html
+*Gunduz, N., & Fokoue, E. (2015). Pattern Discovery in Students’ Evaluations of Professors: A Statistical Data Mining Approach. arXiv preprint arXiv:1501.02263.
+*Dataset: https://archive.ics.uci.edu/ml/datasets/turkiye+student+evaluation
+*https://www.r-project.org/
+*https://scikit-learn.org/stable/modules/clustering.html
 
 
